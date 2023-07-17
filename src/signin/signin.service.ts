@@ -18,11 +18,11 @@ export class SigninService {
     async signin({ email, password }: SignInDTO) {
         const user = await this.userRepository.findUserByEmail(email);
         if (!user) {
-            throw new HttpException('Invalid email', HttpStatus.CONFLICT);
+            throw new HttpException('Invalid email', HttpStatus.UNAUTHORIZED);
         }
         const validPassword = bcrypt.compareSync(password, user.password);
         if (!validPassword) {
-            throw new HttpException('Invalid email', HttpStatus.CONFLICT);
+            throw new HttpException('Invalid email', HttpStatus.UNAUTHORIZED);
         }
         return this.createToken(user);
     }
