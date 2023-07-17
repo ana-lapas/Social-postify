@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 
 export class User {
   constructor(
@@ -6,6 +7,7 @@ export class User {
     private _email: string,
     private _password: string,
     private _avatar: string,
+    readonly id: string = randomUUID(),
   ) {}
 
   set name(name: string) {
